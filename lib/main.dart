@@ -1,5 +1,6 @@
 import 'package:clean_provider_code/core/di/service_locator.dart';
 import 'package:clean_provider_code/feature/data/weather_api_service_impl.dart';
+import 'package:clean_provider_code/feature/provider/theme_provider.dart';
 import 'package:clean_provider_code/feature/provider/weather_provider.dart';
 import 'package:clean_provider_code/feature/repo/weather_repository_impl.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ void main() async {
 WidgetsFlutterBinding.ensureInitialized();
 await setupServiceLocator();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_)=> getIt<WeatherProvider>())
+    ChangeNotifierProvider(create: (_)=> getIt<WeatherProvider>()),
+    ChangeNotifierProvider(create: (_)=> getIt<ThemeProvider>())
   ],
   child: const MyApp()));
 }
@@ -22,13 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Weather App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: const WeatherScreen(),
+    return Consumer<ThemeProvider>(
+      builder: (BuildContext context, themeProvider , Widget? child) {
+        return MaterialApp(
+          title: 'Weather App',
+          themeMode: themeProvider.themeMode,
+          theme: themeProvider.lightTheme,
+          home: const WeatherScreen());
+      },
     );
   }
 }
@@ -47,9 +50,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = context.watch<ThemeProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Weather App'),
+        actions: [
+          IconButton(
+            icon: Icon(
+              themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+            ),
+            onPressed: themeProvider.toggleTheme,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

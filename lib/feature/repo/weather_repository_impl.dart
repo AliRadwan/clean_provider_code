@@ -14,5 +14,4 @@ class WeatherRepositoryImpl implements WeatherRepository{
       throw Exception('Repository Error: Failed to get weather data - $e');
     }
   }
-
 }

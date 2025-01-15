@@ -1,5 +1,5 @@
 import 'package:clean_provider_code/core/network/http_client.dart';
-import 'package:clean_provider_code/core/network/network_exception.dart';
+import 'package:clean_provider_code/core/network/http_error.dart';
 import 'package:clean_provider_code/feature/data/weather_api_service.dart';
 import 'package:clean_provider_code/feature/model/weather_model.dart';
 
@@ -19,7 +19,7 @@ class WeatherApiServiceImpl  implements WeatherApiService {
         'appid': apiKey
       });
       return WeatherModel.fromJson(response);
-    } on NetworkException catch(e){
+    } on HttpError catch(e){
       throw Exception('Failed to get weather data: ${e.message}');
     }
   }

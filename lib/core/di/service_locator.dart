@@ -1,6 +1,7 @@
 import 'package:clean_provider_code/core/network/http_client.dart';
 import 'package:clean_provider_code/feature/data/weather_api_service.dart';
 import 'package:clean_provider_code/feature/data/weather_api_service_impl.dart';
+import 'package:clean_provider_code/feature/provider/theme_provider.dart';
 import 'package:clean_provider_code/feature/provider/weather_provider.dart';
 import 'package:clean_provider_code/feature/repo/weather_repository.dart';
 import 'package:clean_provider_code/feature/repo/weather_repository_impl.dart';
@@ -19,7 +20,8 @@ Future <void> setupServiceLocator() async {
   // Repositories
   getIt.registerLazySingleton<WeatherRepository>(() => WeatherRepositoryImpl(weatherApiService: getIt<WeatherApiService>()));
 
+  getIt.registerLazySingleton(()=> ThemeProvider());
   // Providers
-  getIt.registerFactory<WeatherProvider>(()=>WeatherProvider(weatherRepository: getIt<WeatherRepository>()));
+  getIt.registerFactory<WeatherProvider>(()=>WeatherProvider(weatherRepository: getIt<WeatherRepository>(), themeProvider: getIt<ThemeProvider>()));
 
 }
