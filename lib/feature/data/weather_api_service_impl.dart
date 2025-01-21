@@ -1,5 +1,5 @@
 import 'package:clean_provider_code/core/network/http_client.dart';
-import 'package:clean_provider_code/core/network/http_config.dart';
+import 'package:clean_provider_code/core/network/http_header.dart';
 import 'package:clean_provider_code/core/network/http_error.dart';
 import 'package:clean_provider_code/feature/data/weather_api_service.dart';
 import 'package:clean_provider_code/feature/model/weather_model.dart';
@@ -22,7 +22,7 @@ class WeatherApiServiceImpl  implements WeatherApiService {
           'q': city,
           'units': 'metric',
           'appid': apiKey,
-        },headers: HttpHeader(authorization: '').getHeaders(requireAuth: true),
+        },
       );
 
       return WeatherModel.fromJson(response);

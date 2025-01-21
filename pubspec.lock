@@ -91,6 +91,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.6"
+  http_exception:
+    dependency: "direct main"
+    description:
+      name: http_exception
+      sha256: "38585b9baf7ae31a65c87a6e5d15b40e023883f612a8a712e092ec52a36b4af0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   http_parser:
     dependency: transitive
     description:
@@ -99,6 +107,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  http_status:
+    dependency: transitive
+    description:
+      name: http_status
+      sha256: "61a373f339c6f00e33c92886d945cb681a798b439da8dace9132ee34ab0065c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   leak_tracker:
     dependency: transitive
     description:
